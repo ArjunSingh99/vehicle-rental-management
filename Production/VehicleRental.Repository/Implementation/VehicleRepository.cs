@@ -27,8 +27,7 @@ namespace VehicleRental.Repository.Implementation
 SELECT 
 id As Id,
 model As Model,
-registration_number AS RegistrationNumber,
-booked AS Booked
+registration_number AS RegistrationNumber
 FROM vehicle
 WHERE 1=1 ");
 
