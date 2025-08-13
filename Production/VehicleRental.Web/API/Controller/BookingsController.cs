@@ -116,6 +116,11 @@ namespace VehicleRental.Web.API.Controller
             return NoContent();
         }
 
+        /// <summary>
+        /// Returns the location history of a booking by its booking id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>A list of coordinates (lat long)</returns>
         [HttpGet("{id}/location/history")]
         public async Task<IActionResult> GetLocationHistory(string id)
         {
