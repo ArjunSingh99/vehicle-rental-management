@@ -52,27 +52,6 @@ namespace VehicleRental.Service.Implementation
                 return default;
             }
 
-            /* old code
-            //try
-            //{
-            //    var vehicleBookingStatus = await _vehicleRepository.UpdateVehicleBookingStatus(availableVehicle.RegistrationNumber, status: true);
-
-            //    entity.VehicleRegistrationNumber = availableVehicle.RegistrationNumber;
-
-            //    var bookingId = await _bookingRepository.CreateBooking(entity);
-
-            //    // todo: maybe use an abstract class here for handling transactions
-            //    _bookingRepository.Commit();
-
-            //    return bookingId;
-            //}
-            //catch (Exception e)
-            //{
-            //    _bookingRepository.RollBack();
-            //}
-
-            */
-
             entity.VehicleRegistrationNumber = availableVehicle.RegistrationNumber;
             var bookingId = await _bookingRepository.CreateBooking(entity);
 
@@ -92,50 +71,14 @@ namespace VehicleRental.Service.Implementation
 
             var result = await _bookingRepository.CancelBooking(id);
 
-            /* old code
-            //try
-            //{
-            //    //var vehicle = await GetVehicleByBookingId(id);
-
-            //    //var isValidCancellation = await ValidateCancellation(id, vehicle);
-
-            //    //if (!isValidCancellation)
-            //    //{
-            //    //    return false;
-            //    //}
-
-            //    var vehicleBookingStatus = await _vehicleRepository.UpdateVehicleBookingStatus(vehicle.RegistrationNumber, status: false);
-
-            //    var result = await _bookingRepository.CancelBooking(id);
-
-            //    _bookingRepository.Commit();
-
-            //    return result;
-            //}
-            //catch
-            //{
-            //    _bookingRepository.RollBack();
-            //}
-            */
-
             return result;
         }
+
 
         #region private methods
 
         private async Task<VehicleEntity> AvailableVehicle(BookingEntity entity)
         {
-            /* old code
-            //var vehicleFilter = new VehicleEntity
-            //{
-            //    Model = entity.VehicleModel,
-            //    Booked = false
-            //};
-
-            //var availableVehicles = await _vehicleRepository.GetVehicles(vehicleFilter);
-
-            //return availableVehicles.FirstOrDefault();
-            */
 
             var bookingFilter = new BookingEntity
             {
