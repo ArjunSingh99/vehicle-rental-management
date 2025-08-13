@@ -18,9 +18,5 @@ namespace VehicleRental.Web.API.Model
         [Required]
         [Range(0.01, double.MaxValue, ErrorMessage = "Daily rate must be a positive value.")]
         public double DailyRate { get; set; }
-        [Range(-90, 90)]
-        public double? StartLatitude { get; set; }
-        [Range(-180, 180)]
-        public double? StartLongitude { get; set; }
     }
 }
