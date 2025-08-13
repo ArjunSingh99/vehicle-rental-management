@@ -251,6 +251,31 @@ WHERE id = (@id::int)
             return result >= 1;
         }
 
+        public async Task<IEnumerable<LocationEntity>> GetLocationHistory(string bookingId)
+        {
+            var query = new StringBuilder(@"
+SELECT vl.booking_id,
+       vl.latitude,
+       vl.longitude,
+       vl.timestamp
+FROM vehicle_location vl
+JOIN rentals r ON vl.booking_id = r.id
+WHERE r.id = @bookingId::int
+  AND vl.timestamp BETWEEN r.pickup_date AND r.return_date
+ORDER BY vl.timestamp DESC;
+");
+
+            var param = new
+            {
+                bookingId
+            };
+
+            using var connection = _context.GetConnection();
+            var result = await connection.QueryAsync<LocationEntity>(query.ToString(), param);
+
+            return result ?? [];
+        }
+
         #region transaction related methods
 
         public void Commit()

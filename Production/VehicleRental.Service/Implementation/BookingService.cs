@@ -74,6 +74,12 @@ namespace VehicleRental.Service.Implementation
             return result;
         }
 
+        public async Task<IEnumerable<LocationEntity>> GetLocationHistory(string bookingId)
+        {
+            var result = await _bookingRepository.GetLocationHistory(bookingId);
+
+            return result;
+        }
 
         #region private methods
 

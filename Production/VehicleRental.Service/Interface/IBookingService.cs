@@ -13,5 +13,6 @@ namespace VehicleRental.Service.Interface
         Task<BookingEntity> GetBookingById(string id);
         Task<string> CreateBooking(BookingEntity entity);
         Task<bool> CancelBooking(string id);
+        Task<IEnumerable<LocationEntity>> GetLocationHistory(string bookingId);
     }
 }

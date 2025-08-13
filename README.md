@@ -226,6 +226,34 @@ Accept: application/json
 
 ---
 
+### Get Location History for a Booking
+
+**Request**
+
+```http
+GET /api/v1/bookings/1/location
+Accept: application/json
+```
+
+**Response**
+
+```json
+200 OK
+[
+  {
+    "latitude": 40.712776,
+    "longitude": -74.005974
+  },
+  {
+    "latitude": 40.713000,
+    "longitude": -74.006000
+  }
+  // ...more location records
+]
+```
+
+---
+
 ## Notes
 
 - Ensure PostgreSQL is running and accessible.

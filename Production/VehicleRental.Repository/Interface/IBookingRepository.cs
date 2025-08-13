@@ -15,5 +15,6 @@ namespace VehicleRental.Repository.Interface
         void Commit();
         void RollBack();
         Task<IEnumerable<BookingEntity>> GetAvailableBookings(BookingEntity entity, int? pageSize = null, int? pageNumber = null);
+        Task<IEnumerable<LocationEntity>> GetLocationHistory(string bookingId);
     }
 }

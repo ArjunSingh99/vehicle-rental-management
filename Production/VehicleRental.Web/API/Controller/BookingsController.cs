@@ -116,10 +116,12 @@ namespace VehicleRental.Web.API.Controller
             return NoContent();
         }
 
-        [HttpGet("{id}/location")]
-        public async Task<IActionResult> GetLocation(string id)
+        [HttpGet("{id}/location/history")]
+        public async Task<IActionResult> GetLocationHistory(string id)
         {
-            throw new NotImplementedException();
+            var result = await _bookingService.GetLocationHistory(id);
+
+            return Ok(result);
         }
     }
 }
