@@ -116,12 +116,6 @@ namespace VehicleRental.Web.API.Controller
             return NoContent();
         }
 
-        [HttpPost("{id}/location")]
-        public async Task<IActionResult> UpdateLocation(LocationRequest location)
-        {
-            throw new NotImplementedException();
-        }
-
         [HttpGet("{id}/location")]
         public async Task<IActionResult> GetLocation(string id)
         {

@@ -17,6 +17,18 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleRental.Test", "Test\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VehicleRental.Entity", "Production\VehicleRental.Entity\VehicleRental.Entity.csproj", "{44880CBA-66A4-47E7-B93D-B5B39D086634}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SQL", "SQL", "{817A4808-22FC-4599-8736-11854253DC57}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DDL", "DDL", "{CF02B2CC-AE23-4448-98A9-FBBD1316F0E1}"
+	ProjectSection(SolutionItems) = preProject
+		create_tables.sql = create_tables.sql
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DML", "DML", "{760E4E0A-1980-41CA-8EAD-19D50D9F33CD}"
+	ProjectSection(SolutionItems) = preProject
+		insert_data.sql = insert_data.sql
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +65,8 @@ Global
 		{6F0BCD4C-3EC9-4233-B946-4372FC2AEE03} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{69CAE751-03FB-4DC9-8520-91F21199A4D3} = {1C0BE8DA-F8D1-4415-A6AB-16C03F5C0CC5}
 		{44880CBA-66A4-47E7-B93D-B5B39D086634} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{CF02B2CC-AE23-4448-98A9-FBBD1316F0E1} = {817A4808-22FC-4599-8736-11854253DC57}
+		{760E4E0A-1980-41CA-8EAD-19D50D9F33CD} = {817A4808-22FC-4599-8736-11854253DC57}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F23D665-10FF-4585-AF2A-E0157FE9EC83}
