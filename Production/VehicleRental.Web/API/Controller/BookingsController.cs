@@ -80,6 +80,11 @@ namespace VehicleRental.Web.API.Controller
                 ModelState.AddModelError("ReturnDate", "Return date must be after pickup date.");
             }
 
+            if (request.PickupDate.HasValue && request.PickupDate.Value.Date < DateTime.UtcNow.Date)
+            {
+                ModelState.AddModelError("PickupDate", "Pickup date cannot be in the past.");
+            }
+
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
@@ -110,7 +115,7 @@ namespace VehicleRental.Web.API.Controller
 
             if (result == default)
             {
-                return NotFound();
+                return BadRequest("Unable to cancel booking");
             }
 
             return NoContent();
