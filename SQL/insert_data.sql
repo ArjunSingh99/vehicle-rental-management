@@ -43,3 +43,37 @@ INSERT INTO public.rentals (
     ('Frank Harris', '3344556677', 'GHI234', 'Toyota Corolla', '2025-08-27', '2025-09-05', 29.00, 'Booked'),
     ('Grace Lewis', '9988776655', 'JKL567', 'Hyundai Elantra', '2025-08-25', '2025-09-03', 33.50, 'Booked'),
     ('Henry Walker', '2233445566', 'MNO890', 'Ford Focus', '2025-08-31', '2025-09-10', 28.50, 'Booked');
+
+-- Insert vehicle coordinates
+DO $$
+DECLARE
+    booking RECORD;
+    latitude NUMERIC(9,6);
+    longitude NUMERIC(9,6);
+    base_time TIMESTAMP;
+    i INT;
+BEGIN
+    -- Loop through each booking in the rentals table
+    FOR booking IN SELECT id, pickup_date, return_date FROM public.rentals LOOP
+        -- Start base time at pickup_date + random hour offset (e.g., 0–8 AM)
+        base_time := booking.pickup_date + (FLOOR(random() * 8) || ' hours')::INTERVAL;
+
+        -- Insert 10 locations at 10-minute intervals
+        FOR i IN 0..9 LOOP -- 10 iterations for 10 minutes
+            latitude := 40 + random() * 10;
+            longitude := -75 - random() * 10;
+
+            INSERT INTO public.vehicle_location (
+                booking_id,
+                latitude,
+                longitude,
+                "timestamp"
+            ) VALUES (
+                booking.id,
+                latitude,
+                longitude,
+                base_time + (i * interval '10 minute')
+            );
+        END LOOP;
+    END LOOP;
+END $$;
