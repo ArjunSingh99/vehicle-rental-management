@@ -37,6 +37,7 @@ namespace VehicleRental.Web.API.Controller
         /// <param name="pageNumber"></param>
         /// <returns>A list of all the bookings</returns>
         [HttpGet]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetBookings([FromQuery] BookingEntity entity, int? pageSize, int? pageNumber)
         {
             var result = await _bookingService.GetBookings(entity, pageSize, pageNumber);
@@ -49,7 +50,8 @@ namespace VehicleRental.Web.API.Controller
         /// <param name="id"></param>
         /// <returns>The details of a booking by id</returns>
         [HttpGet("{id}")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetBookingById(string id)
         {
@@ -120,6 +122,7 @@ namespace VehicleRental.Web.API.Controller
         /// <returns></returns>
         [HttpDelete("{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> CancelBooking(string id)
         {
@@ -147,6 +150,7 @@ namespace VehicleRental.Web.API.Controller
         /// <param name="id"></param>
         /// <returns>A list of coordinates (lat long)</returns>
         [HttpGet("{id}/location/history")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<IActionResult> GetLocationHistory(string id)
         {
             var result = await _bookingService.GetLocationHistory(id);

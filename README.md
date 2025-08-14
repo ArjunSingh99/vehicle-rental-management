@@ -83,7 +83,7 @@ Content-Type: application/json
 
 **Response**
 
-```json
+```http
 201 Created
 "Booking created successfully. Booking ID: 12"
 ```
@@ -101,7 +101,7 @@ Accept: application/json
 
 **Response**
 
-```json
+```http
 200 OK
 [
   {
@@ -130,9 +130,9 @@ GET /api/v1/bookings/1
 Accept: application/json
 ```
 
-**Response**
+**Response (Success)**
 
-```json
+```http
 200 OK
 {
   "bookingId": "1",
@@ -147,6 +147,23 @@ Accept: application/json
 }
 ```
 
+**Response (Not Found)**
+
+```http
+404 Not Found
+```
+
+**Response (Bad Request, e.g. invalid id)**
+
+```http
+400 Bad Request
+{
+  "id": [
+    "Booking ID must be a numeric value"
+  ]
+}
+```
+
 ---
 
 ### Cancel Booking
@@ -158,10 +175,23 @@ DELETE /api/v1/bookings/1
 Accept: application/json
 ```
 
-**Response**
+**Response (Success)**
 
 ```http
 204 No Content
+```
+
+**Response (Bad Request, e.g. invalid id or unable to cancel)**
+
+```http
+400 Bad Request
+"Unable to cancel booking"
+```
+
+**Response (Not Found)**
+
+```http
+404 Not Found
 ```
 
 ---
@@ -175,9 +205,9 @@ GET /api/v1/vehicle
 Accept: application/json
 ```
 
-**Response**
+**Response (Success)**
 
-```json
+```http
 200 OK
 [
   {
@@ -194,6 +224,13 @@ Accept: application/json
 ]
 ```
 
+**Response (Not Found)**
+
+```http
+404 Not Found
+"No vehicles found."
+```
+
 ---
 
 ### Get All Customers
@@ -205,9 +242,9 @@ GET /api/v1/customer
 Accept: application/json
 ```
 
-**Response**
+**Response (Success)**
 
-```json
+```http
 200 OK
 [
   {
@@ -224,6 +261,13 @@ Accept: application/json
 ]
 ```
 
+**Response (Not Found)**
+
+```http
+404 Not Found
+"No customers found."
+```
+
 ---
 
 ### Get Location History for a Booking
@@ -231,13 +275,13 @@ Accept: application/json
 **Request**
 
 ```http
-GET /api/v1/bookings/1/location
+GET /api/v1/bookings/1/location/history
 Accept: application/json
 ```
 
 **Response**
 
-```json
+```http
 200 OK
 [
   {
