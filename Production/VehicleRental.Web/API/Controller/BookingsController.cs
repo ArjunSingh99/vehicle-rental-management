@@ -53,6 +53,14 @@ namespace VehicleRental.Web.API.Controller
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> GetBookingById(string id)
         {
+            if (!int.TryParse(id, out _))
+            {
+                ModelState.AddModelError(nameof(id), "Booking ID must be a numeric value");
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var result = await _bookingService.GetBookingById(id);
 
             if (result == default)
@@ -111,6 +119,14 @@ namespace VehicleRental.Web.API.Controller
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> CancelBooking(string id)
         {
+            if (!int.TryParse(id, out _))
+            {
+                ModelState.AddModelError(nameof(id), "Booking ID must be a numeric value");
+            }
+
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
             var result = await _bookingService.CancelBooking(id);
 
             if (result == default)
