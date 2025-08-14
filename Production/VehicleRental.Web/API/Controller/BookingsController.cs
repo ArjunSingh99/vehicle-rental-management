@@ -98,15 +98,19 @@ namespace VehicleRental.Web.API.Controller
 
             var inputMapped = _mapper.Map<BookingEntity>(request);
 
-            var result = await _bookingService.CreateBooking(inputMapped);
-
-            if (result == default)
+            try
             {
-                return BadRequest("Unable to create booking.");
-            }
+                var result = await _bookingService.CreateBooking(inputMapped);
 
-            var response = $"Booking created successfully. Booking ID: {result}";
-            return Created("BookingId", response);
+                var response = $"Booking created successfully. Booking ID: {result}";
+                return Created("BookingId", response);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception (not implemented here)
+                ModelState.AddModelError("Error", ex.Message);
+                return BadRequest(ModelState);
+            }
         }
 
         /// <summary>

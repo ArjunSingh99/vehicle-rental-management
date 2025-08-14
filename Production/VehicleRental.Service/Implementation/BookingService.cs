@@ -14,11 +14,13 @@ namespace VehicleRental.Service.Implementation
     {
         private readonly IBookingRepository _bookingRepository;
         private readonly IVehicleRepository _vehicleRepository;
+        private readonly ICustomerRepository _customerRepository;
 
-        public BookingService(IBookingRepository bookingRepository, IVehicleRepository vehicleRepository)
+        public BookingService(IBookingRepository bookingRepository, IVehicleRepository vehicleRepository, ICustomerRepository customerRepository)
         {
             _bookingRepository = bookingRepository;
             _vehicleRepository = vehicleRepository;
+            _customerRepository = customerRepository;
         }
 
         public async Task<IEnumerable<BookingEntity>> GetBookings(BookingEntity entity, int? pageSize, int? pageNumber)
@@ -43,13 +45,19 @@ namespace VehicleRental.Service.Implementation
         public async Task<string> CreateBooking(BookingEntity entity)
         {
             // todo: add validation for valid customer
+            var validCustomer = await ValidateCustomer(entity);
+
+            if (!validCustomer)
+            {
+                throw new InvalidOperationException("Customer does not exist.");
+            }
 
             var availableVehicle = await AvailableVehicle(entity);
 
             if (availableVehicle == default)
             {
                 // todo: take some action here??
-                return default;
+                throw new InvalidOperationException("No available vehicles found for the specified criteria.");
             }
 
             entity.VehicleRegistrationNumber = availableVehicle.RegistrationNumber;
@@ -135,6 +143,20 @@ namespace VehicleRental.Service.Implementation
 
             return true;
         }
+
+        private async Task<bool> ValidateCustomer(BookingEntity entity)
+        {
+            var customerFilter = new CustomerEntity
+            {
+                CustomerPhoneNumber = entity.CustomerPhoneNumber,
+                CustomerName = entity.CustomerName
+            };
+
+            var result = await _customerRepository.GetCustomersList(customerFilter);
+
+            return result != default && result.Any();
+        }
+
         #endregion
     }
 }

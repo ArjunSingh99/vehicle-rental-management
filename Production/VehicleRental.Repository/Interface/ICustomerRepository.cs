@@ -9,6 +9,6 @@ namespace VehicleRental.Repository.Interface
 {
     public interface ICustomerRepository
     {
-        Task<IEnumerable<CustomerEntity>> GetCustomersList();
+        Task<IEnumerable<CustomerEntity>> GetCustomersList(CustomerEntity customerEntity = default);
     }
 }
